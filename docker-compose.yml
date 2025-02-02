@@ -1,0 +1,30 @@
+services:
+  cartoncaps.webapi:
+    image: ${DOCKER_REGISTRY-}cartoncapswebapi
+    build:
+      context: .
+      dockerfile: CartonCaps.WebApi/Dockerfile
+    container_name: webapi
+    ports:
+      - "8080:80"
+      - "8081:8081"
+    depends_on:
+      - cartoncaps.sql
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      CONNECTION_STRING: "Server=cartoncaps.sql;Initial Catalog=ReferralsDb;User Id=sa;Password=Sxnr*k6w%zq2b%;TrustServerCertificate=true"
+  
+  cartoncaps.sql:
+    image: "mcr.microsoft.com/mssql/server:2022-latest"
+    container_name: sql
+    volumes:
+      - mssql_data:/var/opt/mssql
+    ports:
+     - "1433:1433"
+    environment:
+      MSSQL_SA_PASSWORD: "Sxnr*k6w%zq2b%"
+      ACCEPT_EULA: "Y"
+
+volumes:
+      mssql_data:
+
