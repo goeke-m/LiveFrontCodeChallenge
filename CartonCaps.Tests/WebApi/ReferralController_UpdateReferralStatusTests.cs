@@ -1,12 +1,8 @@
 ﻿using System.Net;
-using System.Net.Http.Json;
 using System.Text;
-using Microsoft.AspNetCore.Http;
 
 namespace CartonCaps.Tests.WebApi;
 
-[TestFixture]
-[Category(TestCategories.Integration)]
 public class ReferralController_UpdateReferralStatusTests : TestsWithTestContainer
 {
     [Test]

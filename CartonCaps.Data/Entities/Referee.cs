@@ -19,14 +19,14 @@ public class Referee : BaseEntity
     public required string LastName { get; set; }
 
     /// <summary>
-    /// Gets or sets the birthday of the referee.
+    /// Gets or sets the phone number of the referee.
     /// </summary>
-    public DateOnly? Birthday { get; set; }
+    public string? PhoneNumber { get; set; }
 
     /// <summary>
-    /// Gets or sets the zipcode of the referee.
+    /// Gets or sets the email address of the referee.
     /// </summary>
-    public string? Zipcode { get; set; }
+    public string? Email { get; set; }
 
     /// <summary>
     /// Gets or sets the referral associated with the referee.
@@ -42,7 +42,7 @@ public class RefereeConfiguration : IEntityTypeConfiguration<Referee>
         builder.HasKey(x => x.Id);
         builder.Property(x => x.FirstName).IsRequired();
         builder.Property(x => x.LastName).IsRequired();
-        builder.Property(x => x.Birthday).IsRequired();
-        builder.Property(x => x.Zipcode).IsRequired();
+        builder.Property(x => x.PhoneNumber).IsRequired(false);
+        builder.Property(x => x.Email).IsRequired(false);
     }
 }

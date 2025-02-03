@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace CartonCaps.Data.Entities;
+﻿namespace CartonCaps.Data.Entities;
 
 /// <summary>
 /// Represents the base entity with a unique identifier.

@@ -1,11 +1,11 @@
 ﻿using CartonCaps.Data.Entities;
 using NetArchTest.Rules;
-using Shouldly;
 
 namespace CartonCaps.Tests.Architecture;
 
 [TestFixture]
 [Category(TestCategories.Architecture)]
+[Parallelizable(ParallelScope.All)]
 public class DataArchitectureTests : ArchitectureBaseTests
 {
     [Test]

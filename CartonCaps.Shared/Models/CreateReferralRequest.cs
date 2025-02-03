@@ -18,14 +18,14 @@ public class CreateReferralRequest
     public required string LastName { get; set; }
 
     /// <summary>
-    /// Gets or sets the birthday of the referee.
+    /// Gets or sets the phone number of the referee.
     /// </summary>
-    public DateOnly? Birthday { get; set; }
+    public string? PhoneNumber { get; set; }
 
     /// <summary>
-    /// Gets or sets the zipcode of the referee.
+    /// Gets or sets the email of the referee.
     /// </summary>
-    public string? Zipcode { get; set; }
+    public string? Email { get; set; }
 
     /// <summary>
     /// Gets or sets the status of the referral.
@@ -51,7 +51,7 @@ public class CreateReferralRequestValidator : AbstractValidator<CreateReferralRe
         RuleFor(x => x.ReferralCode).NotEmpty().WithMessage("Referral code must be included when creating a referral.");
         RuleFor(x => x.FirstName).NotEmpty().WithMessage("The Referee's first name must be included when creating a referral.");
         RuleFor(x => x.LastName).NotEmpty().WithMessage("The Referee's last name must be included when creating a referral.");
-        RuleFor(x => x.Birthday).NotEmpty().WithMessage("The Referee's birthday must be included when creating a referral.");
-        RuleFor(x => x.Zipcode).NotEmpty().WithMessage("The Referee's zipcode must be included when creating a referral.");
+        RuleFor(x => x.PhoneNumber).NotEmpty().When(x => string.IsNullOrWhiteSpace(x.Email)).WithMessage("The Referee's phone number or email must be included when creating a referral.");
+        RuleFor(x => x.Email).NotEmpty().When(x => string.IsNullOrWhiteSpace(x.PhoneNumber)).WithMessage("The Referee's phone number or email must be included when creating a referral.");
     }
 }

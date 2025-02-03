@@ -1,11 +1,8 @@
 ﻿using System.Net;
 using System.Text;
-using CartonCaps.Data.Entities;
 
 namespace CartonCaps.Tests.WebApi;
 
-[TestFixture]
-[Category(TestCategories.Integration)]
 public class ReferralController_UpdateReferralTests : TestsWithTestContainer
 {
     [Test]
@@ -16,7 +13,7 @@ public class ReferralController_UpdateReferralTests : TestsWithTestContainer
         var referralCode = Fixture.Create<string>();
         var referral = SeedReferrals(1, referralCode).First();
         var updatedReferral = Fixture.Build<UpdateReferralRequest>().With(x => x.ReferralId, referral.Id)
-            .With(x => x.Birthday, referral.Referee.Birthday)
+            .With(x => x.PhoneNumber, referral.Referee.PhoneNumber)
             .With(x => x.FirstName, "John").Create();
 
         var jsonRequest = JsonConvert.SerializeObject(updatedReferral);
@@ -37,7 +34,7 @@ public class ReferralController_UpdateReferralTests : TestsWithTestContainer
         var referralCode = Fixture.Create<string>();
         var referral = SeedReferrals(1, referralCode).First();
         var updatedReferral = Fixture.Build<UpdateReferralRequest>().With(x => x.ReferralId, referral.Id)
-            .With(x => x.Birthday, referral.Referee.Birthday)
+            .With(x => x.PhoneNumber, referral.Referee.PhoneNumber)
             .With(x => x.FirstName, "John").Create();
 
         var jsonRequest = JsonConvert.SerializeObject(updatedReferral);
@@ -60,7 +57,7 @@ public class ReferralController_UpdateReferralTests : TestsWithTestContainer
         var client = Factory.CreateClient();
         var referralId = Fixture.Create<Guid>();
         var updatedReferral = Fixture.Build<UpdateReferralRequest>().With(x => x.ReferralId, referralId)
-            .With(x => x.Birthday, new DateOnly(1980,1,14))
+            .With(x => x.PhoneNumber, "555-902-6489")
             .With(x => x.FirstName, "John").Create();
 
         var jsonRequest = JsonConvert.SerializeObject(updatedReferral);

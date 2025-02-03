@@ -2,8 +2,6 @@
 
 namespace CartonCaps.Tests.WebApi;
 
-[TestFixture]
-[Category(TestCategories.Integration)]
 public class ReferralController_GetReferralByIdTests : TestsWithTestContainer
 {
     [Test]

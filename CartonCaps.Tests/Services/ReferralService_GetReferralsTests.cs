@@ -1,10 +1,7 @@
-﻿using AutoFixture;
-using CartonCaps.Data.Entities;
+﻿using CartonCaps.Data.Entities;
 using CartonCaps.Services.Services;
-using CartonCaps.Shared.Models;
 using Microsoft.Extensions.Logging;
 using Moq;
-using Shouldly;
 
 namespace CartonCaps.Tests.Services;
 
@@ -22,7 +19,7 @@ public class ReferralService_GetReferralsTests : TestsWithInMemoryDb
     }
 
     [Test]
-    public async Task GetReferrals_ReturnsEmptyList_WhenNoReferralsExist()
+    public async Task GetReferrals_ReturnsEmptyList_WhenNoReferralsDoNotExist()
     {
         // Act
         var result = await _referralService.GetReferrals(new Shared.Models.GetReferralsRequest { ReferralCode = "XY7G4D" }, CancellationToken.None);
@@ -37,7 +34,7 @@ public class ReferralService_GetReferralsTests : TestsWithInMemoryDb
     public async Task GetReferrals_ReturnsReferrals_WhenReferralsExist()
     {
         // Arrange
-        var referee = Fixture.Build<Referee>().With(x => x.Birthday, new DateOnly(1984, 01, 12)).Create();
+        var referee = Fixture.Build<Referee>().With(x => x.PhoneNumber, "555-902-6489").Create();
         var referral = Fixture.Build<Referral>().With(x => x.Referee, referee).Create();
         ReferralDbContext.Referrals.Add(referral);
         await ReferralDbContext.SaveChangesAsync();
@@ -56,7 +53,7 @@ public class ReferralService_GetReferralsTests : TestsWithInMemoryDb
     public async Task GetReferrals_ReturnsReferrals_WhenReferralsWithSpecificExist()
     {
         // Arrange
-        var referee = Fixture.Build<Referee>().With(x => x.Birthday, new DateOnly(1984, 01, 12)).Create();
+        var referee = Fixture.Build<Referee>().With(x => x.PhoneNumber, "555-902-6489").Create();
         var referrals = Fixture.Build<Referral>()
             .With(x => x.Referee, referee)
             .With(x => x.ReferralCode, "XY7G4D")

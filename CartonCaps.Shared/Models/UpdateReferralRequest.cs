@@ -21,14 +21,14 @@ public class UpdateReferralRequest
     public required string LastName { get; set; }
 
     /// <summary>
-    /// Gets or sets the birthday of the person being referred.
+    /// Gets or sets the phone number of the person being referred.
     /// </summary>
-    public DateOnly? Birthday { get; set; }
+    public string? PhoneNumber { get; set; }
 
     /// <summary>
-    /// Gets or sets the zipcode of the person being referred.
+    /// Gets or sets the email address of the person being referred.
     /// </summary>
-    public string? Zipcode { get; set; }
+    public string? Email { get; set; }
 
     /// <summary>
     /// Gets or sets the status of the referral.

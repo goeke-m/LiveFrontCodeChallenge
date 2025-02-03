@@ -1,10 +1,7 @@
-﻿using AutoFixture;
-using CartonCaps.Data.Entities;
+﻿using CartonCaps.Data.Entities;
 using CartonCaps.Services.Services;
-using CartonCaps.Shared.Models;
 using Microsoft.Extensions.Logging;
 using Moq;
-using Shouldly;
 
 namespace CartonCaps.Tests.Services;
 
@@ -25,7 +22,7 @@ public class ReferralService_GetReferralTests : TestsWithInMemoryDb
     public async Task GetReferral_WhenReferralExists_ReturnsReferral()
     {
         // Arrange
-        var referee = Fixture.Build<Referee>().With(x => x.Birthday, new DateOnly(1984, 01, 12)).Create();
+        var referee = Fixture.Build<Referee>().With(x => x.PhoneNumber, "555-902-6489").Create();
         var referral = Fixture.Build<Referral>().With(x => x.Referee, referee).Create();
         ReferralDbContext.Referrals.Add(referral);
         await ReferralDbContext.SaveChangesAsync();
@@ -40,8 +37,8 @@ public class ReferralService_GetReferralTests : TestsWithInMemoryDb
         result.Referral.ReferralStatus.ShouldBe(referral.ReferralStatus);
         result.Referral.Referee.FirstName.ShouldBe(referral.Referee.FirstName);
         result.Referral.Referee.LastName.ShouldBe(referral.Referee.LastName);
-        result.Referral.Referee.Birthday.ShouldBe(referral.Referee.Birthday);
-        result.Referral.Referee.Zipcode.ShouldBe(referral.Referee.Zipcode);
+        result.Referral.Referee.PhoneNumber.ShouldBe(referral.Referee.PhoneNumber);
+        result.Referral.Referee.Email.ShouldBe(referral.Referee.Email);
     }
 
     [Test]

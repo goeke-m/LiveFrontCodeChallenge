@@ -1,9 +1,5 @@
-﻿using System.Net.Http;
+﻿namespace CartonCaps.Tests.WebApi;
 
-namespace CartonCaps.Tests.WebApi;
-
-[TestFixture]
-[Category(TestCategories.Integration)]
 public class HealthCheckTests : TestsWithTestContainer
 {
     [Test]
@@ -13,7 +9,7 @@ public class HealthCheckTests : TestsWithTestContainer
         var client = Factory.CreateClient();
 
         // Act
-        var httpResponse = await client.GetAsync("api/health");
+        var httpResponse = await client.GetAsync("api/v1/health");
 
         // Assert
         httpResponse.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);

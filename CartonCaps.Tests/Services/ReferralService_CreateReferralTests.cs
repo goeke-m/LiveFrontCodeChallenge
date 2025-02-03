@@ -1,9 +1,6 @@
-﻿using AutoFixture;
-using CartonCaps.Services.Services;
-using CartonCaps.Shared.Models;
+﻿using CartonCaps.Services.Services;
 using Microsoft.Extensions.Logging;
 using Moq;
-using Shouldly;
 
 namespace CartonCaps.Tests.Services
 {
@@ -24,7 +21,7 @@ namespace CartonCaps.Tests.Services
         public async Task CreateReferral_ValidRequest_ReturnsCreateReferralResponse()
         {
             // Arrange
-            var request = Fixture.Build<CreateReferralRequest>().With(x => x.Birthday, new DateOnly(1980, 4, 23)).Create();
+            var request = Fixture.Build<CreateReferralRequest>().With(x => x.PhoneNumber, "555-902-6489").Create();
 
             // Act
             var response = await _referralService.CreateReferral(request, CancellationToken.None);

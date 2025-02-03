@@ -1,7 +1,7 @@
-﻿using System.Reflection;
-using CartonCaps.Data.IoC;
+﻿using CartonCaps.Data.IoC;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace CartonCaps.Services.IoC;
 

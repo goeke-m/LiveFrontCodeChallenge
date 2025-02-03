@@ -1,12 +1,7 @@
 ﻿using System.Net;
-using CartonCaps.Data;
-using CartonCaps.Data.Entities;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace CartonCaps.Tests.WebApi;
 
-[TestFixture]
-[Category(TestCategories.Integration)]
 public class ReferralController_GetReferralsTests : TestsWithTestContainer
 {
     [Test]
@@ -71,7 +66,7 @@ public class ReferralController_GetReferralsTests : TestsWithTestContainer
 
         var referralCode = Fixture.Create<string>();
         var pendingReferrals = SeedReferrals(3, referralCode);
-        
+
         // Set 2 to complete for a controlled experiment
         var completeReferrals = SeedReferrals(2, referralCode, ReferralStatus.Complete);
 

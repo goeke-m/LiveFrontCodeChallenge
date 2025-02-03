@@ -1,10 +1,7 @@
-﻿using AutoFixture;
-using CartonCaps.Data.Entities;
+﻿using CartonCaps.Data.Entities;
 using CartonCaps.Services.Services;
-using CartonCaps.Shared.Models;
 using Microsoft.Extensions.Logging;
 using Moq;
-using Shouldly;
 
 namespace CartonCaps.Tests.Services;
 
@@ -25,7 +22,7 @@ public class ReferralService_UpdateReferralStatusTests : TestsWithInMemoryDb
     public async Task UpdateReferralStatus_ShouldUpdateStatus()
     {
         // Arrange
-        var referee = Fixture.Build<Referee>().With(x => x.Birthday, new DateOnly(1984, 01, 12)).Create();
+        var referee = Fixture.Build<Referee>().With(x => x.PhoneNumber, "555-902-6489").Create();
         var referral = Fixture.Build<Referral>().With(x => x.Referee, referee).With(x => x.ReferralStatus, ReferralStatus.Pending).Create();
 
         ReferralDbContext.Referrals.Add(referral);
@@ -38,7 +35,7 @@ public class ReferralService_UpdateReferralStatusTests : TestsWithInMemoryDb
         };
 
         // Act
-        var result = await _referralService.UpdateReferralStatus(request, CancellationToken.None);
+        await _referralService.UpdateReferralStatus(request, CancellationToken.None);
 
         // Assert
         var updatedReferral = ReferralDbContext.Referrals.FirstOrDefault(x => x.Id == referral.Id);
@@ -49,7 +46,7 @@ public class ReferralService_UpdateReferralStatusTests : TestsWithInMemoryDb
     public async Task UpdateReferralStatus_ShouldReturnUpdatedReferral()
     {
         // Arrange
-        var referee = Fixture.Build<Referee>().With(x => x.Birthday, new DateOnly(1984, 01, 12)).Create();
+        var referee = Fixture.Build<Referee>().With(x => x.PhoneNumber, "555-902-6489").Create();
         var referral = Fixture.Build<Referral>().With(x => x.Referee, referee).With(x => x.ReferralStatus, ReferralStatus.Pending).Create();
 
         ReferralDbContext.Referrals.Add(referral);

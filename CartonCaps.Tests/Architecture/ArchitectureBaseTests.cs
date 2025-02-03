@@ -1,7 +1,7 @@
-﻿using System.Reflection;
-using CartonCaps.Data.IoC;
+﻿using CartonCaps.Data.IoC;
 using CartonCaps.Services.IoC;
 using CartonCaps.WebApi.IoC;
+using System.Reflection;
 
 namespace CartonCaps.Tests.Architecture;
 

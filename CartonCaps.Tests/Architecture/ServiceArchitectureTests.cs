@@ -1,12 +1,12 @@
 ﻿using CartonCaps.Services;
 using CartonCaps.Tests.Architecture.CustomRules;
 using NetArchTest.Rules;
-using Shouldly;
 
 namespace CartonCaps.Tests.Architecture
 {
     [TestFixture]
     [Category(TestCategories.Architecture)]
+    [Parallelizable(ParallelScope.All)]
     public class ServiceArchitectureTests : ArchitectureBaseTests
     {
         [Test]

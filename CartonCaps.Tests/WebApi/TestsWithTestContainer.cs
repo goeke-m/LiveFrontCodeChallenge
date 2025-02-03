@@ -2,12 +2,12 @@
 using CartonCaps.Data.Entities;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.OpenApi.Writers;
 using Testcontainers.MsSql;
 
 namespace CartonCaps.Tests.WebApi;
 
-[SetUpFixture]
+[TestFixture]
+[Category(TestCategories.Integration)]
 public class TestsWithTestContainer
 {
     protected WebApplicationFactory<Program> Factory { get; set; }
@@ -34,14 +34,13 @@ public class TestsWithTestContainer
         await DbContainer.StopAsync();
         await DbContainer.DisposeAsync();
     }
-
     protected IEnumerable<Referral> SeedReferrals(int quantity, string referralCode, ReferralStatus referralStatus = ReferralStatus.Pending)
     {
         var referrals = new List<Referral>();
         for (int i = 0; i < quantity; i++)
         {
             var referee = Fixture.Build<Referee>()
-                .With(x => x.Birthday, new DateOnly(1984, 01, 12))
+                .With(x => x.PhoneNumber, "555-902-6489")
                 .Without(x => x.Referral).Create();
             var referral = Fixture.Build<Referral>()
                 .With(x => x.Referee, referee)

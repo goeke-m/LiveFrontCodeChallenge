@@ -43,8 +43,8 @@ namespace CartonCaps.Services.Services
                 {
                     FirstName = request.FirstName,
                     LastName = request.LastName,
-                    Birthday = request.Birthday,
-                    Zipcode = request.Zipcode
+                    PhoneNumber = request.PhoneNumber,
+                    Email = request.Email
                 }
             };
 
@@ -64,8 +64,8 @@ namespace CartonCaps.Services.Services
                     {
                         FirstName = referral.Referee.FirstName,
                         LastName = referral.Referee.LastName,
-                        Birthday = referral.Referee.Birthday,
-                        Zipcode = referral.Referee.Zipcode
+                        PhoneNumber = referral.Referee.PhoneNumber,
+                        Email = referral.Referee.Email
                     }
                 }
             };
@@ -103,8 +103,8 @@ namespace CartonCaps.Services.Services
                     {
                         FirstName = referral.Referee.FirstName,
                         LastName = referral.Referee.LastName,
-                        Birthday = referral.Referee.Birthday,
-                        Zipcode = referral.Referee.Zipcode
+                        PhoneNumber = referral.Referee.PhoneNumber,
+                        Email = referral.Referee.Email
                     }
                 }
             };
@@ -151,8 +151,8 @@ namespace CartonCaps.Services.Services
                     {
                         FirstName = r.Referee.FirstName,
                         LastName = r.Referee.LastName,
-                        Birthday = r.Referee.Birthday,
-                        Zipcode = r.Referee.Zipcode
+                        PhoneNumber = r.Referee.PhoneNumber,
+                        Email = r.Referee.Email
                     }
                 }).ToListAsync(cancellationToken: cancellationToken)
             };
@@ -193,8 +193,8 @@ namespace CartonCaps.Services.Services
                     {
                         FirstName = referral.Referee.FirstName,
                         LastName = referral.Referee.LastName,
-                        Birthday = referral.Referee.Birthday,
-                        Zipcode = referral.Referee.Zipcode
+                        PhoneNumber = referral.Referee.PhoneNumber,
+                        Email = referral.Referee.Email
                     }
                 }
             };
@@ -222,8 +222,8 @@ namespace CartonCaps.Services.Services
             referral.ReferralStatus = request.ReferralStatus;
             referral.Referee.FirstName = request.FirstName;
             referral.Referee.LastName = request.LastName;
-            referral.Referee.Birthday = request.Birthday;
-            referral.Referee.Zipcode = request.Zipcode;
+            referral.Referee.PhoneNumber = request.PhoneNumber;
+            referral.Referee.Email = request.Email;
             referral.ReferralCode = request.ReferralCode;
 
             context.Referrals.Update(referral);
@@ -242,8 +242,8 @@ namespace CartonCaps.Services.Services
                     {
                         FirstName = referral.Referee.FirstName,
                         LastName = referral.Referee.LastName,
-                        Birthday = referral.Referee.Birthday,
-                        Zipcode = referral.Referee.Zipcode
+                        PhoneNumber = referral.Referee.PhoneNumber,
+                        Email = referral.Referee.Email
                     }
                 }
             };

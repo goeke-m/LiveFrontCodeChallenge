@@ -1,6 +1,5 @@
 using CartonCaps.WebApi.IoC;
 using CartonCaps.WebApi.Middleware;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 var builder = WebApplication.CreateBuilder(args);
 

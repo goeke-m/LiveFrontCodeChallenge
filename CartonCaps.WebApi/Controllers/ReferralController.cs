@@ -2,7 +2,6 @@
 using CartonCaps.Shared.Extensions;
 using CartonCaps.Shared.Models;
 using FluentValidation;
-using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CartonCaps.WebApi.Controllers;
@@ -28,15 +27,18 @@ public class ReferralController : ControllerBase
         _validators = validators;
     }
 
+
     /// <summary>
     /// This GET method retrieves a collection of referrals based on the request. The 'ReferralCode' property is required and filters referrals with the referrer's code.
-    /// The 'status' property is optional and can be appended to filter referrals of a given status.
+    /// The 'status' property is optional and can be appended to filter referrals of a given status. If no referrals are found, a 404 response is returned.
     /// </summary>
+    /// <param name="referralCode">The referral code to filter referrals.</param>
+    /// <param name="referralStatus">The optional status to filter referrals.</param>
     /// <param name="cancellationToken">Token to monitor for cancellation requests.</param>
-    /// <returns>A list of referrals.</returns>
+    /// <returns>A list of referrals matching the criteria.</returns>
     /// <remarks>
     /// Example request:
-    /// GET: api/v1/referral/getreferrals?referralCode=ABC123&referralStatus=Pending
+    ///     GET: api/v1/referral/getreferrals?referralCode=ABC123
     /// </remarks>
     [HttpGet]
     [Route("getreferrals")]
@@ -55,6 +57,10 @@ public class ReferralController : ControllerBase
     /// <param name="id">The unique identifier of the referral.</param>
     /// <param name="cancellationToken">Token to monitor for cancellation requests.</param>
     /// <returns>The referral details.</returns>
+    /// <remarks>
+    /// Example request:
+    ///     GET: api/v1/referral/getreferralbyid/d290f1ee-6c54-4b01-90e6-d701748f0851
+    /// </remarks>
     [HttpGet]
     [Route("getreferralbyid/{id}")]
     [ProducesResponseType(typeof(GetReferralByIdResponse), StatusCodes.Status200OK)]
@@ -71,7 +77,19 @@ public class ReferralController : ControllerBase
     /// </summary>
     /// <param name="request">The request containing referral details.</param>
     /// <param name="cancellationToken">Token to monitor for cancellation requests.</param>
-    /// <returns>The created referral details.</returns>
+    /// <returns>The created referral details.</returns>   
+    /// <remarks>
+    /// Example request:
+    ///     POST: api/v1/referral/createreferral
+    ///     {
+    ///         "firstName": "John",
+    ///         "lastName": "Doe",
+    ///         "phooneNumber": "555-902-6489",
+    ///         "email": "",
+    ///         "referralStatus": "Pending",
+    ///         "referralCode": "ABC123"
+    ///     }
+    /// </remarks>
     [HttpPost]
     [Route("createreferral")]
     [ProducesResponseType(typeof(CreateReferralResponse), StatusCodes.Status201Created)]
@@ -125,15 +143,15 @@ public class ReferralController : ControllerBase
     /// <remarks>  
     /// Example request:  
     /// PUT: api/v1/referral/updatereferral  
-    /// {  
+    /// {
     ///     "referralId": "d290f1ee-6c54-4b01-90e6-d701748f0851",  
     ///     "firstName": "John",  
     ///     "lastName": "Doe",  
-    ///     "birthday": "1990-01-01",  
-    ///     "zipcode": "12345",  
+    ///     "phoneNumber": "555-902-6489",  
+    ///     "email": "",  
     ///     "referralStatus": "Complete",  
     ///     "referralCode": "ABC123"  
-    /// }  
+    /// }
     /// </remarks>  
     [HttpPut]
     [Route("updatereferral")]

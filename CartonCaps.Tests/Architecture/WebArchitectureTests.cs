@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NetArchTest.Rules;
-using Shouldly;
 
 namespace CartonCaps.Tests.Architecture;
 
 [TestFixture]
 [Category(TestCategories.Architecture)]
+[Parallelizable(ParallelScope.All)]
 public class WebArchitectureTests : ArchitectureBaseTests
 {
     [Test]
@@ -20,7 +20,8 @@ public class WebArchitectureTests : ArchitectureBaseTests
     [Test]
     public void Web_Controllers_ShouldHaveDependencyOnService()
     {
-        var result = Types.InAssembly(Web).That().ResideInNamespace(WebControllerNamespace).Should().HaveDependencyOn(ServiceNamespace).GetResult();
+        var result = Types.InAssembly(Web).That().ResideInNamespace(WebControllerNamespace).And().DoNotHaveNameStartingWith("Health")
+            .Should().HaveDependencyOn(ServiceNamespace).GetResult();
 
         PrintFailedResults(result, nameof(Web_Controllers_ShouldHaveDependencyOnService));
         result.IsSuccessful.ShouldBeTrue("Web assembly should have a dependency on the service project");

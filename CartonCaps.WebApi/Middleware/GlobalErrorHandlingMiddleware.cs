@@ -12,9 +12,10 @@ public class GlobalErrorHandlingMiddleware
     private readonly ILogger<GlobalErrorHandlingMiddleware> _logger;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="GlobalErrorHandlingMiddleware"/> class.
+    /// Middleware to handle global exceptions in the application.
     /// </summary>
     /// <param name="next">The next middleware in the pipeline.</param>
+    /// <param name="logger">The logger to log errors.</param>
     public GlobalErrorHandlingMiddleware(RequestDelegate next, ILogger<GlobalErrorHandlingMiddleware> logger)
     {
         _next = next;
