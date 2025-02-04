@@ -108,7 +108,7 @@ dotnet dev-certs https --trust
 #### From the root project directory
 
 ```sh
-docker compose  -f "./docker-compose.yml" -f "./docker-compose.override.yml" -p livefrontcodechallenge up
+docker compose  -f "./docker-compose.yml" -f "./docker-compose.override.yml" -p livefrontcodechallenge up --build
 ```
 - This will start the API and SQL Server containers.
 - API Swagger Endpoint: `https://localhost:8081/swagger/index.html`.
