@@ -1,19 +1,17 @@
 <div align="left" style="position: relative;">
-<img src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/ec559a9f6bfd399b82bb44393651661b08aaf7ba/icons/folder-markdown-open.svg" align="right" width="30%" style="margin: -20px 0 0 20px;">
 <h1><code>Livefront Code Challenge</code></h1>
 <p align="left">
-	<em>Here are a few slogan ideas that capture the essence of the project:
-
-**"Code with Certainty, Deliver with Confidence"**</em>
+	<em><b>"Code with Certainty, Deliver with Confidence"</b></em>
 </p>
 <p align="left">
-	<!-- Shields.io badges disabled, using skill icons. --></p>
 <p align="left">Built with the tools and technologies:</p>
 <p align="left">
 <img src="https://img.shields.io/badge/C%23-239120.svg?style={badge_style}&logo=c-sharp&logoColor=white" alt="CSharp" />
-<img src="https://img.shields.io/badge/NuGet-004880.svg?style={badge_style}&logo=NuGet&logoColor=white" alt=".Net" />	
+<img src="https://img.shields.io/badge/.Net-blue?logo=dotnet" alt=".Net" />	
 <img src="https://img.shields.io/badge/Docker-2CA5E0.svg?style={badge_style}&logo=docker&logoColor=white" alt="Docker" />
-<img src="https://img.shields.io/badge/NuGet-004880.svg?style={badge_style}&logo=NuGet&logoColor=white" alt="NuGet">
+<img src="https://img.shields.io/badge/Docker_Test_Container-blue?logo=docker&logoColor=white" alt="Docker" />
+<img src="https://img.shields.io/badge/NuGet-004880.svg?style={badge_style}&logo=NuGet&logoColor=white" alt="NuGet" />
+<img src="https://img.shields.io/badge/NUnit-darkgreen" alt="NUnit" />
 	</p>
 </div>
 <br clear="right">
@@ -97,9 +95,17 @@ docker compose  -f "./docker-compose.yml" -f "./docker-compose.override.yml" -p 
 ### 🤖 Usage
 <details>
 	<summary><b>Command Line Interface</b></summary>
-	<b>Using `docker`<b> &nbsp; [<img align="center" src="https://img.shields.io/badge/Docker-2CA5E0.svg?style={badge_style}&logo=docker&logoColor=white" />](https://www.docker.com/)
+	Using <code>docker</code> &nbsp; <a href="https://www.docker.com/" ><img align="center" src="https://img.shields.io/badge/Docker-2CA5E0.svg?style={badge_style}&logo=docker&logoColor=white" /></a>
 
-- From the root project directory
+#### HTTPS
+
+This project uses HTTPS for local development. This requires the use of a trusted certificate. Before running the application, the following command will check for an existing certificate or generate a new one.
+
+```pwsh
+dotnet dev-certs https --trust
+```
+
+#### From the root project directory
 
 ```sh
 docker compose  -f "./docker-compose.yml" -f "./docker-compose.override.yml" -p livefrontcodechallenge up
@@ -120,9 +126,9 @@ Run the test suite using the following command:
 
 <detail>
 	<summary><b>Command Line Interface</b></summary>
-		<b>Using `nuget`</b> &nbsp; [<img align="center" src="https://img.shields.io/badge/C%23-239120.svg?style={badge_style}&logo=c-sharp&logoColor=white" />](https://docs.microsoft.com/en-us/dotnet/csharp/)
+		Using <code>nuget</code> &nbsp; <a href="https://docs.microsoft.com/en-us/dotnet/csharp/"> <img align="center" src="https://img.shields.io/badge/C%23-239120.svg?style={badge_style}&logo=c-sharp&logoColor=white" /> </a>
 
-- From the root project directory
+#### From the root project directory
 
 ```sh
 dotnet test ./CartonCaps.Tests/CartonCaps.Tests.csproj 
@@ -141,35 +147,35 @@ dotnet test ./CartonCaps.Tests/CartonCaps.Tests.csproj
 [
     {
         "referee": {
-			"id": "143c90ed-83c2-4ca7-9c07-24957cfadddf",
             "firstName": "Marsha",
             "lastName": "Mellow",
             "phoneNumber": "555-908-4836",
             "email": null
         },
+        "id": "143c90ed-83c2-4ca7-9c07-24957cfadddf",
         "referralStatus": "Complete",
         "referralCode": "X5YGP01"
     },
     {
         "referee": {
-            "id": "d69171d3-5a79-464b-9ac3-6dc220c07e30",
 			"firstName": "Gene",
             "lastName": "Pool",
             "phoneNumber": null,
             "email": "genepool@gmail.com"
         },
+        "id": "d69171d3-5a79-464b-9ac3-6dc220c07e30",
         "referralStatus": "Pending",
         "referralCode": "X5YGP01"
     },
     {
         "referee": {
-			"id": "24278723-2248-48da-a6f2-c7ba4056a144",
             "firstName": "Willie",
             "lastName": "Makeit",
             "phoneNumber": null,
             "email": "williemakeit@gmail.com",
             "referral": null
         },
+        "id": "24278723-2248-48da-a6f2-c7ba4056a144",
         "referralStatus": "Complete",
         "referralCode": "X5YGP01"
     }
@@ -236,19 +242,3 @@ The Referrals API provides the following endpoints:
 - **Endpoint**: `GET /api/v1/health`
 - **Response**: 200 Status Code if Api is up and running.
 ---
-
-## Scenario Considerations
-Several design assumptions were made in drafting this API specification. Additionally, pertinent questions were considered during development. These questions and their corresponding answers related to the API will be presented in a Q&A format below.
-
-### How will existing users create new referrals using their existing referral code?
-Existing users can create new referrals by incorporating their referral `code` into the request body when sending a POST request to the /createreferral endpoint. The API will validate the request and register the new referral using the provided code.
-
-### How will referral links There are three ways included in the scenario to share a referral:
-
-1. **Share via Text**: A pre-populated text message sent via SMS or other text messaging solution.
-2. **Share via Email**: A pre-populated email sent via email client.
-3. **Share via Share Sheet**: Integration with the device's share sheet to allow sharing via any app that supports sharing or quick copy of the link.be shared?
-
-In a production environment, the processes for sharing via text and email would be automated. In this API, these functionalities are simulated by including fields for email and phone numbers in the Referee model. Requiring at least one of the two in order to create a new referral.
-
-The share sheet method will be handled by the client application, which is beyond the scope of this API. This approach also considers scenarios where the referee's email address or phone number might not be available.
