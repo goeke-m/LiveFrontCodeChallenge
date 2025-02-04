@@ -43,13 +43,12 @@ public static class DataDependencyInjection
         var marshaReferralId = Guid.Parse("143C90ED-83C2-4CA7-9C07-24957CFADDDF");
         var geneReferralId = Guid.Parse("D69171D3-5A79-464B-9AC3-6DC220C07E30");
 
-        var willieReferral = context.Set<Referral>().FirstOrDefault(r => willieReferralId == r.Id);
+       var willieReferral = context.Referrals.FirstOrDefault(r => willieReferralId == r.Id);
 
         if (willieReferral is null)
         {
             context.Add(new Referral
             {
-                Id = willieReferralId,
                 ReferralCode = referralCode,
                 Referee = new Referee
                 {
@@ -64,13 +63,12 @@ public static class DataDependencyInjection
             context.SaveChanges();
         }
 
-        var marshaReferral = context.Set<Referral>().FirstOrDefault(r => marshaReferralId == r.Id);
+        var marshaReferral = context.Referrals.FirstOrDefault(r => marshaReferralId == r.Id);
 
         if (marshaReferral is null)
         {
             context.Add(new Referral
             {
-                Id = marshaReferralId,
                 ReferralCode = referralCode,
                 Referee = new Referee
                 {
@@ -85,13 +83,12 @@ public static class DataDependencyInjection
             context.SaveChanges();
         }
 
-        var geneReferral = context.Set<Referral>().FirstOrDefault(r => geneReferralId == r.Id);
+        var geneReferral = context.Referrals.FirstOrDefault(r => geneReferralId == r.Id);
 
         if (geneReferral is null)
         {
             context.Add(new Referral
             {
-                Id = geneReferralId,
                 ReferralCode = referralCode,
                 Referee = new Referee
                 {
