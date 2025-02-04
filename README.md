@@ -118,13 +118,19 @@ docker compose  -f "./docker-compose.yml" -f "./docker-compose.override.yml" -p 
 
 <details>
 	<summary><b>Visual Studio</b></summary>
+
+  - Open the solution in Visual Studio
+  - Ensure the Docker-compose is selected as the Startup Item
+  - Click the Docker Compose run button
+    - This will generate the containers and then open the swagger url afterwards.
+    
 </details>
 
 
 ### 🧪 Testing
 Run the test suite using the following command:
 
-<detail>
+<details>
 	<summary><b>Command Line Interface</b></summary>
 		Using <code>nuget</code> &nbsp; <a href="https://docs.microsoft.com/en-us/dotnet/csharp/"> <img align="center" src="https://img.shields.io/badge/C%23-239120.svg?style={badge_style}&logo=c-sharp&logoColor=white" /> </a>
 
@@ -133,10 +139,15 @@ Run the test suite using the following command:
 ```sh
 dotnet test ./CartonCaps.Tests/CartonCaps.Tests.csproj 
 ```
-</detail>
+</details>
 
 <details>
 	<summary><b>Visual Studio</b></summary>
+
+  - Open the solution in Visual Studio
+  - Build the solution using the build button command
+  - If the Test Explorer is not open, open it Test -> Test Explorer
+  - In the Test Explorer click on the 'Run All Tests In View' button
 </details>
 
 ---

@@ -1,0 +1,218 @@
+{
+	"info": {
+		"_postman_id": "7ce6aa3c-68e3-437d-9307-298d3a64c75f",
+		"name": "LiveFront Referral Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17550353",
+		"_collection_link": "https://gold-rocket-538553.postman.co/workspace/EDJE-Jukebox~5b1d3ef1-ae11-4079-b3e6-7d2bcf3b4ff6/collection/17550353-7ce6aa3c-68e3-437d-9307-298d3a64c75f?action=share&source=collection_link&creator=17550353"
+	},
+	"item": [
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8081/api/v1/health",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Referral By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8081/api/v1/referral/getreferralbyid/24278723-2248-48DA-A6F2-C7BA4056A144",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"referral",
+						"getreferralbyid",
+						"24278723-2248-48DA-A6F2-C7BA4056A144"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Referrals Code Only",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8081/api/v1/referral/getreferrals?referralcode=X5YGP01",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"referral",
+						"getreferrals"
+					],
+					"query": [
+						{
+							"key": "referralcode",
+							"value": "X5YGP01"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Referrals Code & Status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8081/api/v1/referral/getreferrals?referralcode=X5YGP01&referralstatus=complete",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"referral",
+						"getreferrals"
+					],
+					"query": [
+						{
+							"key": "referralcode",
+							"value": "X5YGP01"
+						},
+						{
+							"key": "referralstatus",
+							"value": "complete",
+							"description": "Complete"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Referral",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"Justin\",\r\n    \"lastName\": \"Time\",\r\n    \"email\": \"justintime@gmail.com\",\r\n    \"referralCode\": \"XYZ846G\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8081/api/v1/referral/createreferral",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"referral",
+						"createreferral"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Referral",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"Justin\",\r\n    \"lastName\": \"Time\",\r\n    \"email\": \"justintime@gmail.com\",\r\n    \"referralCode\": \"XYZ846G\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8081/api/v1/referral/createreferral",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"referral",
+						"createreferral"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Referral Status",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"referralId\": \"b2847aa4-cade-4caf-b422-0c5015eaf6d0\",\r\n   \"referralStatus\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:8081/api/v1/referral/updatereferralstatus",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"referral",
+						"updatereferralstatus"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
