@@ -21,26 +21,28 @@ public static class DataDependencyInjection
     {
         services.AddDbContext<ReferralDbContext>(options =>
         {
-            var connectionString = configuration.GetSection("CONNECTION_STRING").Value;
-            options.UseSqlServer(connectionString, x => x.MigrationsAssembly(Assembly.GetAssembly(typeof(DataDependencyInjection)).FullName))
-            .UseSeeding((context, _) =>
+        var connectionString = configuration.GetSection("CONNECTION_STRING").Value;
+            options.UseSqlServer(connectionString, x => x.MigrationsAssembly(Assembly.GetAssembly(typeof(DataDependencyInjection)).FullName));
+
+            using (var scope = services.BuildServiceProvider().CreateScope())
             {
-                context.Database.EnsureCreated();
+                var context = scope.ServiceProvider.GetService<ReferralDbContext>();
+                context?.Database.EnsureCreated();
                 SeedData(context);
-            });
+            }
         });
         
         return services;
     }
 
-    private static void SeedData(DbContext context)
+    private static void SeedData(ReferralDbContext context)
     {
         var referralCode = "X5YGP01";
         var willieReferralId = Guid.Parse("24278723-2248-48DA-A6F2-C7BA4056A144");
         var marshaReferralId = Guid.Parse("143C90ED-83C2-4CA7-9C07-24957CFADDDF");
         var geneReferralId = Guid.Parse("D69171D3-5A79-464B-9AC3-6DC220C07E30");
 
-       var willieReferral = context.Set<Referral>().FirstOrDefault(r => willieReferralId == r.Id);
+        var willieReferral = context.Referrals.FirstOrDefault(r => willieReferralId == r.Id);
 
         if (willieReferral is null)
         {
@@ -60,7 +62,7 @@ public static class DataDependencyInjection
             context.SaveChanges();
         }
 
-        var marshaReferral = context.Set<Referral>().FirstOrDefault(r => marshaReferralId == r.Id);
+        var marshaReferral = context.Referrals.FirstOrDefault(r => marshaReferralId == r.Id);
 
         if (marshaReferral is null)
         {
@@ -80,7 +82,7 @@ public static class DataDependencyInjection
             context.SaveChanges();
         }
 
-        var geneReferral = context.Set<Referral>().FirstOrDefault(r => geneReferralId == r.Id);
+        var geneReferral = context.Referrals.FirstOrDefault(r => geneReferralId == r.Id);
 
         if (geneReferral is null)
         {
