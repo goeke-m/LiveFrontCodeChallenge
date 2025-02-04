@@ -2,6 +2,7 @@
 using CartonCaps.Services.IoC;
 using CartonCaps.Shared.Models;
 using FluentValidation;
+using Microsoft.OpenApi;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.Text.Json;
@@ -21,73 +22,40 @@ public static class WebDependencyInjection
     /// <returns>The <see cref="IServiceCollection"/> with the registered services.</returns>
     public static void AddWebDependencies(this IServiceCollection services, IConfiguration configuration)
     {
-
         services.AddFluentValidation();
-
         services.AddServiceDependencies(configuration);
-
         services.AddApiVersioning(options =>
-
         {
-
             options.ReportApiVersions = true;
-
             options.AssumeDefaultVersionWhenUnspecified = true;
-
             options.DefaultApiVersion = new ApiVersion(1, 0);
 
         }).AddApiExplorer(options =>
-
          {
-
              options.GroupNameFormat = "'v'V";
-
              options.SubstituteApiVersionInUrl = true;
-
          });
 
-
-
         services.AddControllers().AddJsonOptions(static options =>
-
         {
-
             options.JsonSerializerOptions.ReadCommentHandling = JsonCommentHandling.Skip;
-
             options.JsonSerializerOptions.AllowTrailingCommas = true;
-
         });
-
-
 
         services.AddEndpointsApiExplorer();
-
         services.AddSwaggerGen(x =>
-
         {
-
             x.SwaggerDoc("v1", new OpenApiInfo
-
             {
-
                 Title = "Carton Caps Referrals API",
-
                 Description = "Web API for managing referrals.",
-
                 Version = "v1"
-
             });
 
-
-
             var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-
             var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-
             x.IncludeXmlComments(xmlPath);
-
         });
-
     }
 
 

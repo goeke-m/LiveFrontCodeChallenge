@@ -16,6 +16,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{8A45FCE2-9BE4-4319-8A6D-61DF4DDD2327}"
 	ProjectSection(SolutionItems) = preProject
 		..\..\..\Downloads\20240813 - Livefront Coding Challenge - UI Design.pdf = ..\..\..\Downloads\20240813 - Livefront Coding Challenge - UI Design.pdf
+		OpenApi.json = OpenApi.json
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{3AD489F8-C813-4A47-835F-0B44BAD8F0D7}"

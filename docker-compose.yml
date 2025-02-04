@@ -12,7 +12,7 @@ services:
       - cartoncaps.sql
     environment:
       ASPNETCORE_ENVIRONMENT: "Development"
-      CONNECTION_STRING: "Server=cartoncaps.sql;Initial Catalog=ReferralsDb;User Id=sa;Password=Sxnr*k6w%zq2b%;TrustServerCertificate=true"
+      CONNECTION_STRING: "Server=cartoncaps.sql;Initial Catalog=ReferralsDb;User Id=sa;Password=Sxnr*k6w%zq2b%;TrustServerCertificate=true" # Connection string would be in secret vault if this were a full solution
   
   cartoncaps.sql:
     image: "mcr.microsoft.com/mssql/server:2022-latest"
@@ -22,7 +22,7 @@ services:
     ports:
      - "1433:1433"
     environment:
-      MSSQL_SA_PASSWORD: "Sxnr*k6w%zq2b%"
+      MSSQL_SA_PASSWORD: "Sxnr*k6w%zq2b%"  # Password would be in secret vault if this were a full solution
       ACCEPT_EULA: "Y"
 
 volumes:

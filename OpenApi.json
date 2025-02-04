@@ -1,0 +1,599 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Carton Caps Referrals API",
+        "description": "Web API for managing referrals.",
+        "version": "v1"
+    },
+    "paths": {
+        "/api/v1/health": {
+            "get": {
+                "tags": [
+                    "Health"
+                ],
+                "summary": "Endpoint to check the health of the application.",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                }
+            }
+        },
+        "/api/v1/Referral/getreferrals": {
+            "get": {
+                "tags": [
+                    "Referral"
+                ],
+                "summary": "This GET method retrieves a collection of referrals based on the request. The 'ReferralCode' property is required and filters referrals with the referrer's code.\r\nThe 'status' property is optional and can be appended to filter referrals of a given status. If no referrals are found, a 404 response is returned.",
+                "description": "Example request:\r\n    GET: api/v1/referral/getreferrals?referralCode=ABC123",
+                "parameters": [
+                    {
+                        "name": "referralCode",
+                        "in": "query",
+                        "description": "The referral code to filter referrals.",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "referralStatus",
+                        "in": "query",
+                        "description": "The optional status to filter referrals.",
+                        "schema": {
+                            "$ref": "#/components/schemas/ReferralStatus"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetReferralsResponse"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetReferralsResponse"
+                                }
+                            },
+                            "text/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetReferralsResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProblemDetails"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProblemDetails"
+                                }
+                            },
+                            "text/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProblemDetails"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/Referral/getreferralbyid/{id}": {
+            "get": {
+                "tags": [
+                    "Referral"
+                ],
+                "summary": "This GET method retrieves an existing referral specified by the referral ID in the path. If no existing referral is found, a 404 response is returned.",
+                "description": "Example request:\r\n    GET: api/v1/referral/getreferralbyid/d290f1ee-6c54-4b01-90e6-d701748f0851",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The unique identifier of the referral.",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetReferralByIdResponse"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetReferralByIdResponse"
+                                }
+                            },
+                            "text/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetReferralByIdResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProblemDetails"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProblemDetails"
+                                }
+                            },
+                            "text/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProblemDetails"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/Referral/createreferral": {
+            "post": {
+                "tags": [
+                    "Referral"
+                ],
+                "summary": "This POST method creates a new referral using the provided information. The request body must include the code from the referrer and referee first and\r\nlast name. By default, the created referral has status 'Pending' but can be overridden if provided on the request body.",
+                "description": "Example request:\r\n    POST: api/v1/referral/createreferral\r\n    {\r\n        \"firstName\": \"John\",\r\n        \"lastName\": \"Doe\",\r\n        \"phooneNumber\": \"555-902-6489\",\r\n        \"email\": \"\",\r\n        \"referralStatus\": \"Pending\",\r\n        \"referralCode\": \"ABC123\"\r\n    }",
+                "requestBody": {
+                    "description": "The request containing referral details.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateReferralRequest"
+                            }
+                        },
+                        "text/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateReferralRequest"
+                            }
+                        },
+                        "application/*+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateReferralRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CreateReferralResponse"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CreateReferralResponse"
+                                }
+                            },
+                            "text/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CreateReferralResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProblemDetails"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProblemDetails"
+                                }
+                            },
+                            "text/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProblemDetails"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/Referral/updatereferralstatus": {
+            "patch": {
+                "tags": [
+                    "Referral"
+                ],
+                "summary": "This PATCH method updates the status of an existing referral specified by the referral ID in the path. The request body must include the new status as a string for the referral. \r\nIf no existing referral is found, a 404 response is returned.",
+                "description": "Example request:\r\nPATCH: api/v1/referral/updatereferralstatus\r\n{\r\n    \"referralId\": \"d290f1ee-6c54-4b01-90e6-d701748f0851\",\r\n    \"referralStatus\": \"Complete\"\r\n}",
+                "requestBody": {
+                    "description": "The request containing the referral status update details.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateReferralStatusRequest"
+                            }
+                        },
+                        "text/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateReferralStatusRequest"
+                            }
+                        },
+                        "application/*+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateReferralStatusRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Accepted",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UpdateReferralStatusResponse"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UpdateReferralStatusResponse"
+                                }
+                            },
+                            "text/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UpdateReferralStatusResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProblemDetails"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProblemDetails"
+                                }
+                            },
+                            "text/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProblemDetails"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/Referral/updatereferral": {
+            "put": {
+                "tags": [
+                    "Referral"
+                ],
+                "summary": "This PUT method updates a referral specified by the referral ID in the path. The request body must include the full updated information for the referral.  \r\nThis operation will accept and override the existing referral with the new information. If no matching referral exists, it will be created with the provided information.",
+                "description": "Example request:  \r\nPUT: api/v1/referral/updatereferral  \r\n{\r\n    \"referralId\": \"d290f1ee-6c54-4b01-90e6-d701748f0851\",  \r\n    \"firstName\": \"John\",  \r\n    \"lastName\": \"Doe\",  \r\n    \"phoneNumber\": \"555-902-6489\",  \r\n    \"email\": \"\",  \r\n    \"referralStatus\": \"Complete\",  \r\n    \"referralCode\": \"ABC123\"  \r\n}",
+                "requestBody": {
+                    "description": "The request containing updated referral details.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateReferralRequest"
+                            }
+                        },
+                        "text/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateReferralRequest"
+                            }
+                        },
+                        "application/*+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateReferralRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Accepted",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UpdateReferralResponse"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UpdateReferralResponse"
+                                }
+                            },
+                            "text/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UpdateReferralResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProblemDetails"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProblemDetails"
+                                }
+                            },
+                            "text/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProblemDetails"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "CreateReferralRequest": {
+                "required": [
+                    "firstName",
+                    "lastName",
+                    "referralCode"
+                ],
+                "type": "object",
+                "properties": {
+                    "firstName": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "lastName": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "phoneNumber": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "email": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "referralStatus": {
+                        "$ref": "#/components/schemas/ReferralStatus"
+                    },
+                    "referralCode": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "CreateReferralResponse": {
+                "type": "object",
+                "properties": {
+                    "referral": {
+                        "$ref": "#/components/schemas/ReferralModel"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "GetReferralByIdResponse": {
+                "type": "object",
+                "properties": {
+                    "referral": {
+                        "$ref": "#/components/schemas/ReferralModel"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "GetReferralsResponse": {
+                "type": "object",
+                "properties": {
+                    "referrals": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ReferralModel"
+                        },
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ProblemDetails": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "title": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "status": {
+                        "type": "integer",
+                        "format": "int32",
+                        "nullable": true
+                    },
+                    "detail": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "instance": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": {
+
+                }
+            },
+            "RefereeModel": {
+                "required": [
+                    "firstName",
+                    "lastName"
+                ],
+                "type": "object",
+                "properties": {
+                    "firstName": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "lastName": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "phoneNumber": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "email": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "referral": {
+                        "$ref": "#/components/schemas/ReferralModel"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ReferralModel": {
+                "required": [
+                    "referralCode"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "refereeId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "referee": {
+                        "$ref": "#/components/schemas/RefereeModel"
+                    },
+                    "referralStatus": {
+                        "$ref": "#/components/schemas/ReferralStatus"
+                    },
+                    "referralCode": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "ReferralStatus": {
+                "enum": [ 0, 1, 2 ],
+                "type": "integer",
+                "format": "int32"
+            },
+            "UpdateReferralRequest": {
+                "required": [
+                    "firstName",
+                    "lastName",
+                    "referralCode"
+                ],
+                "type": "object",
+                "properties": {
+                    "referralId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "firstName": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "lastName": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "phoneNumber": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "email": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "referralStatus": {
+                        "$ref": "#/components/schemas/ReferralStatus"
+                    },
+                    "referralCode": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "additionalProperties": false
+            },
+            "UpdateReferralResponse": {
+                "type": "object",
+                "properties": {
+                    "referral": {
+                        "$ref": "#/components/schemas/ReferralModel"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "UpdateReferralStatusRequest": {
+                "type": "object",
+                "properties": {
+                    "referralId": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "referralStatus": {
+                        "$ref": "#/components/schemas/ReferralStatus"
+                    }
+                },
+                "additionalProperties": false
+            },
+            "UpdateReferralStatusResponse": {
+                "type": "object",
+                "properties": {
+                    "referral": {
+                        "$ref": "#/components/schemas/ReferralModel"
+                    }
+                },
+                "additionalProperties": false
+            }
+        }
+    }
+}

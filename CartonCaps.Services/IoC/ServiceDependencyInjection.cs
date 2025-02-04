@@ -14,6 +14,7 @@ public static class ServiceDependencyInjection
     /// Registers all service dependencies in the dependency injection container.
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/> to add the services to.</param>
+    /// <param name="configuration">The <see cref="IConfiguration"/> instance used to configure the services.</param>
     /// <returns>The <see cref="IServiceCollection"/> with the registered services.</returns>
     public static IServiceCollection AddServiceDependencies(this IServiceCollection services, IConfiguration configuration)
     {

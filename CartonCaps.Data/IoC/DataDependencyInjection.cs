@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CartonCaps.Data.Entities;
+using CartonCaps.Shared.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -28,8 +30,80 @@ public static class DataDependencyInjection
         {
             var context = scope.ServiceProvider.GetService<ReferralDbContext>();
             context?.Database.EnsureCreated();
+            SeedData(context);
         }
 
         return services;
+    }
+
+    private static void SeedData(ReferralDbContext context)
+    {
+        var referralCode = "X5YGP01";
+        var willieReferralId = Guid.Parse("24278723-2248-48DA-A6F2-C7BA4056A144");
+        var marshaReferralId = Guid.Parse("143C90ED-83C2-4CA7-9C07-24957CFADDDF");
+        var geneReferralId = Guid.Parse("D69171D3-5A79-464B-9AC3-6DC220C07E30");
+
+        var willieReferral = context.Set<Referral>().FirstOrDefault(r => willieReferralId == r.Id);
+
+        if (willieReferral is null)
+        {
+            context.Add(new Referral
+            {
+                Id = willieReferralId,
+                ReferralCode = referralCode,
+                Referee = new Referee
+                {
+                    Id = willieReferralId,
+                    FirstName = "Willie",
+                    LastName = "Makeit",
+                    Email = "williemakeit@gmail.com"
+                },
+                ReferralStatus = ReferralStatus.Complete,
+            });
+
+            context.SaveChanges();
+        }
+
+        var marshaReferral = context.Set<Referral>().FirstOrDefault(r => marshaReferralId == r.Id);
+
+        if (marshaReferral is null)
+        {
+            context.Add(new Referral
+            {
+                Id = marshaReferralId,
+                ReferralCode = referralCode,
+                Referee = new Referee
+                {
+                    Id = marshaReferralId,
+                    FirstName = "Marsha",
+                    LastName = "Mellow",
+                    PhoneNumber = "555-908-4836"
+                },
+                ReferralStatus = ReferralStatus.Complete,
+            });
+
+            context.SaveChanges();
+        }
+
+        var geneReferral = context.Set<Referral>().FirstOrDefault(r => geneReferralId == r.Id);
+
+        if (geneReferral is null)
+        {
+            context.Add(new Referral
+            {
+                Id = geneReferralId,
+                ReferralCode = referralCode,
+                Referee = new Referee
+                {
+                    Id = geneReferralId,
+                    FirstName = "Gene",
+                    LastName = "Pool",
+                    Email = "genepool@gmail.com"
+                },
+                ReferralStatus = ReferralStatus.Pending,
+            });
+
+            context.SaveChanges();
+        }
     }
 }
