@@ -23,15 +23,15 @@ public static class DataDependencyInjection
         {
         var connectionString = configuration.GetSection("CONNECTION_STRING").Value;
             options.UseSqlServer(connectionString, x => x.MigrationsAssembly(Assembly.GetAssembly(typeof(DataDependencyInjection)).FullName));
-
-            using (var scope = services.BuildServiceProvider().CreateScope())
-            {
-                var context = scope.ServiceProvider.GetService<ReferralDbContext>();
-                context?.Database.EnsureCreated();
-                SeedData(context);
-            }
         });
-        
+
+        using (var scope = services.BuildServiceProvider().CreateScope())
+        {
+            var context = scope.ServiceProvider.GetService<ReferralDbContext>();
+            context?.Database.EnsureCreated();
+            SeedData(context);
+        }
+
         return services;
     }
 
