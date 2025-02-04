@@ -49,10 +49,10 @@ public static class DataDependencyInjection
         {
             context.Add(new Referral
             {
+                Id = willieReferralId,
                 ReferralCode = referralCode,
                 Referee = new Referee
                 {
-                    Id = willieReferralId,
                     FirstName = "Willie",
                     LastName = "Makeit",
                     Email = "williemakeit@gmail.com"
@@ -69,10 +69,10 @@ public static class DataDependencyInjection
         {
             context.Add(new Referral
             {
+                Id = marshaReferralId,
                 ReferralCode = referralCode,
                 Referee = new Referee
                 {
-                    Id = marshaReferralId,
                     FirstName = "Marsha",
                     LastName = "Mellow",
                     PhoneNumber = "555-908-4836"
@@ -89,10 +89,10 @@ public static class DataDependencyInjection
         {
             context.Add(new Referral
             {
+                Id = geneReferralId,
                 ReferralCode = referralCode,
                 Referee = new Referee
                 {
-                    Id = geneReferralId,
                     FirstName = "Gene",
                     LastName = "Pool",
                     Email = "genepool@gmail.com"
