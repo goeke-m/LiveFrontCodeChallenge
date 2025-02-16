@@ -12,6 +12,7 @@
 <img src="https://img.shields.io/badge/Docker_Test_Container-blue?logo=docker&logoColor=white" alt="Docker" />
 <img src="https://img.shields.io/badge/NuGet-004880.svg?style={badge_style}&logo=NuGet&logoColor=white" alt="NuGet" />
 <img src="https://img.shields.io/badge/NUnit-darkgreen" alt="NUnit" />
+<img src="https://github.com/goeke-m/LiveFrontCodeChallenge/actions/workflows/dotnet.yml/badge.svg" />
 	</p>
 </div>
 <br clear="right">
