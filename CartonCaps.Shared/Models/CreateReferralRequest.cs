@@ -48,10 +48,10 @@ public class CreateReferralRequestValidator : AbstractValidator<CreateReferralRe
     /// </summary>
     public CreateReferralRequestValidator()
     {
-        RuleFor(x => x.ReferralCode).NotEmpty().WithMessage("Referral code must be included when creating a referral.");
+        RuleFor(x => x.ReferralCode).NotEmpty().WithMessage("Referral code must be included when creating a referral.").Matches(@"^[a-zA-Z0-9]+$");
         RuleFor(x => x.FirstName).NotEmpty().WithMessage("The Referee's first name must be included when creating a referral.");
         RuleFor(x => x.LastName).NotEmpty().WithMessage("The Referee's last name must be included when creating a referral.");
         RuleFor(x => x.PhoneNumber).NotEmpty().When(x => string.IsNullOrWhiteSpace(x.Email)).WithMessage("The Referee's phone number or email must be included when creating a referral.");
-        RuleFor(x => x.Email).NotEmpty().When(x => string.IsNullOrWhiteSpace(x.PhoneNumber)).WithMessage("The Referee's phone number or email must be included when creating a referral.");
+        RuleFor(x => x.Email).NotEmpty().When(x => string.IsNullOrWhiteSpace(x.PhoneNumber)).WithMessage("The Referee's phone number or email must be included when creating a referral.").EmailAddress();
     }
 }

@@ -16,6 +16,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{8A45FCE2-9BE4-4319-8A6D-61DF4DDD2327}"
 	ProjectSection(SolutionItems) = preProject
 		..\..\..\Downloads\20240813 - Livefront Coding Challenge - UI Design.pdf = ..\..\..\Downloads\20240813 - Livefront Coding Challenge - UI Design.pdf
+		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
 		LiveFront Referral Api.postman_collection.json = LiveFront Referral Api.postman_collection.json
 		OpenApi.json = OpenApi.json
 		README.md = README.md

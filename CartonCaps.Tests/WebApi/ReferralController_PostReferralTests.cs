@@ -94,7 +94,7 @@ public class ReferralController_PostReferralTests : TestsWithTestContainer
     }
 
     [Test]
-    public void PostReferral_WhenRequestIsValid_ReturnsCreated()
+    public void PostReferral_WhenReferralCodeIsNotLettersAndNumbers_ReturnsBadRequest()
     {
         // Arrange
         var client = Factory.CreateClient();
@@ -104,6 +104,50 @@ public class ReferralController_PostReferralTests : TestsWithTestContainer
             LastName = "Doe",
             PhoneNumber = "555-902-6489",
             Email = "12345",
+            ReferralCode = "'abc123'",
+            ReferralStatus = ReferralStatus.Pending
+        };
+
+        // Act
+        var response = client.PostAsJsonAsync("api/v1/referral/createreferral", request).Result;
+
+        // Assert
+        response.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
+    }
+
+    [Test]
+    public void PostReferral_WhenEmailInvalid_ReturnsBadRequest()
+    {
+        // Arrange
+        var client = Factory.CreateClient();
+        var request = new CreateReferralRequest
+        {
+            FirstName = "John",
+            LastName = "Doe",
+            PhoneNumber = "555-902-6489",
+            Email = "12345",
+            ReferralCode = "'abc123'",
+            ReferralStatus = ReferralStatus.Pending
+        };
+
+        // Act
+        var response = client.PostAsJsonAsync("api/v1/referral/createreferral", request).Result;
+
+        // Assert
+        response.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
+    }
+
+    [Test]
+    public void PostReferral_WhenRequestIsValid_ReturnsCreated()
+    {
+        // Arrange
+        var client = Factory.CreateClient();
+        var request = new CreateReferralRequest
+        {
+            FirstName = "John",
+            LastName = "Doe",
+            PhoneNumber = "555-902-6489",
+            Email = "john.doe@gmail.com",
             ReferralCode = "ABC123",
             ReferralStatus = ReferralStatus.Pending
         };
@@ -125,7 +169,6 @@ public class ReferralController_PostReferralTests : TestsWithTestContainer
             FirstName = "John",
             LastName = "Doe",
             PhoneNumber = "555-902-6489",
-            Email = "12345",
             ReferralCode = "ABC123",
             ReferralStatus = ReferralStatus.Pending
         };
@@ -154,7 +197,7 @@ public class ReferralController_PostReferralTests : TestsWithTestContainer
             FirstName = "John",
             LastName = "Doe",
             PhoneNumber = "555-902-6489",
-            Email = "12345",
+            Email = "john.doe@gmail.com",
             ReferralCode = "ABC123",
             ReferralStatus = ReferralStatus.Pending
         };
@@ -176,7 +219,7 @@ public class ReferralController_PostReferralTests : TestsWithTestContainer
             FirstName = "John",
             LastName = "Doe",
             PhoneNumber = "555-902-6489",
-            Email = "12345",
+            Email = "john.doe@gmail.com",
             ReferralCode = "ABC123",
             ReferralStatus = ReferralStatus.Pending
         };

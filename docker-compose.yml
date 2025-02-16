@@ -17,14 +17,14 @@ services:
   cartoncaps.sql:
     image: "mcr.microsoft.com/mssql/server:2022-latest"
     container_name: sql
-    volumes:
-      - mssql_data:/var/opt/mssql
+#    volumes:
+#      - mssql_data:/var/opt/mssql
     ports:
      - "1433:1433"
     environment:
       MSSQL_SA_PASSWORD: "Sxnr*k6w%zq2b%"  # Password would be in secret vault if this were a full solution
       ACCEPT_EULA: "Y"
 
-volumes:
-      mssql_data:
+#volumes:
+#      mssql_data:
 
